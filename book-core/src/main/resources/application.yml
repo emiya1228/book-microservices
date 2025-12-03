@@ -1,0 +1,91 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api/core
+
+spring:
+  application:
+    name: book-core-service
+
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/library_db?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8
+    username: root
+    password: 127314hzsh
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # Nacos 配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: public
+        group: DEFAULT_GROUP
+        metadata:
+          version: 1.0
+        enabled: true
+        register-enabled: true
+        ip: 127.0.0.1
+        port: ${server.port}
+
+# MyBatis Plus 配置
+mybatis-plus:
+  configuration:
+    # 开启驼峰命名映射
+    map-underscore-to-camel-case: true
+    # 开启二级缓存
+    cache-enabled: true
+    # 配置日志实现
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 自动驼峰映射（默认true，但建议显式配置）
+    auto-mapping-behavior: full
+    # 配置JdbcTypeForNull
+    jdbc-type-for-null: 'null'
+
+  global-config:
+    db-config:
+      # 主键类型 0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: auto
+      # 表名前缀
+      table-prefix: t_
+      # 逻辑删除配置
+      logic-delete-field: deleted  # 逻辑删除字段名
+      logic-delete-value: 1        # 逻辑已删除值
+      logic-not-delete-value: 0    # 逻辑未删除值
+      # 字段策略 0:"忽略判断",1:"非 NULL 判断",2:"非空判断"
+      insert-strategy: not_null
+      update-strategy: not_null
+
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.book.bookcore.entity
+
+  # 分页插件配置
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countSql
+
+# 启用Actuator端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+# 开启详细日志
+logging:
+  level:
+    com.alibaba.cloud.nacos: DEBUG
+    com.alibaba.nacos.client.naming: INFO
+    org.springframework.cloud.client.discovery: DEBUG
+    com.book.bookcore.mapper: DEBUG  # 你的 Mapper 包路径

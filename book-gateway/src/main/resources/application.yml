@@ -1,0 +1,47 @@
+server:
+  port: 8080  # 网关端口
+
+spring:
+  application:
+    name: book-gateway  # 服务名称
+  
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848  # Nacos地址
+        namespace: public
+        group: DEFAULT_GROUP
+        enabled: true
+        register-enabled: true
+    
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # 启用服务发现路由
+          lower-case-service-id: true  # 服务名小写
+      
+      routes:
+        # 路由到核心服务
+        - id: book-core-service
+          uri: lb://book-core-service  # lb://表示负载均衡
+          predicates:
+            - Path=/api/core/**        # 匹配路径
+
+# Actuator监控配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # 暴露所有端点
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+
+# 日志配置（开启详细日志便于调试）
+logging:
+  level:
+    com.alibaba.cloud.nacos: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: INFO
