@@ -26,6 +26,19 @@ spring:
           uri: lb://book-core-service  # lb://表示负载均衡
           predicates:
             - Path=/api/core/**        # 匹配路径
+          filters:
+            - name: JwtAuthFilter
+              args:
+                enabled: true
+        #路由到用户服务
+        - id: book-user-service
+          uri: lb://book-user-service
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - name: JwtAuthFilter
+              args:
+                enabled: true
 
 # Actuator监控配置
 management:
@@ -45,3 +58,11 @@ logging:
     com.alibaba.cloud.nacos: DEBUG
     org.springframework.cloud.gateway: DEBUG
     reactor.netty: INFO
+
+# JWT配置
+jwt:
+  secret: book-microservices-jwt-secret-2025-change-me-in-production
+  expiration: 7200
+  header: Authorization
+  prefix: "Bearer "
+

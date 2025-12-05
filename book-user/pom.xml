@@ -11,7 +11,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>book-core</artifactId>
+    <artifactId>book-user</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -69,12 +69,34 @@
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
         <!-- 其他依赖... -->
     </dependencies>
 
     <!-- 核心服务构建配置 -->
     <build>
-        <finalName>book-core</finalName>
+        <finalName>book-user</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

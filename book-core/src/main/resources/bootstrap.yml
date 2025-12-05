@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: book-core-service
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: DEFAULT_GROUP
+        namespace: public
+        # 共享配置
+        shared-configs[0]:
+          data-id: common.yaml
+          group: DEFAULT_GROUP
+          refresh: true  # ✅ 关键：开启刷新
+        # 扩展配置（服务特有）
+        extension-configs[0]:
+          data-id: ${spring.application.name}.yaml  # 自动匹配服务名
+          group: DEFAULT_GROUP
+          refresh: true  # ✅ 关键：开启刷新

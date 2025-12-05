@@ -59,6 +59,12 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <!-- 注意：网关模块不能有spring-boot-starter-web依赖！ -->
         <!-- 如果有，请删除或注释掉 -->
     </dependencies>
