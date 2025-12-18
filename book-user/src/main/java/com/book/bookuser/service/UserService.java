@@ -1,5 +1,6 @@
 package com.book.bookuser.service;
 
+import com.book.bookcommon.config.UserContext;
 import com.book.bookcommon.constant.Constants;
 import com.book.bookcommon.exception.ServiceException;
 
@@ -10,6 +11,7 @@ import com.book.bookuser.util.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -44,5 +46,11 @@ public class UserService {
         }
         String token = jwtUtil.generateToken(user.getId(), user.getUsername(), user.getRole());
         return token;
+    }
+
+    public User getCurrentUserInfo() {
+        Long currentUserId = UserContext.getCurrentUserId();
+        User user = userMapper.selectById(currentUserId);
+        return user;
     }
 }

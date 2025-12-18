@@ -1,0 +1,59 @@
+{
+  "analysis": {
+    "analyzer": {
+      "ik_max_word": {
+        "type": "custom",
+        "tokenizer": "ik_max_word"
+      },
+      "ik_smart": {
+        "type": "custom",
+        "tokenizer": "ik_smart"
+      },
+      "pinyin": {
+        "type": "custom",
+        "tokenizer": "standard",
+        "filter": ["pinyin_filter", "word_delimiter"]
+      },
+      "standard": {
+        "type": "standard",
+        "stopwords": "_english_"
+      }
+    },
+    "tokenizer": {
+      "ik_max_word": {
+        "type": "ik_max_word",
+        "use_smart": false
+      },
+      "ik_smart": {
+        "type": "ik_smart",
+        "use_smart": true
+      }
+    },
+    "filter": {
+      "pinyin_filter": {
+        "type": "pinyin",
+        "keep_full_pinyin": true,
+        "keep_joined_full_pinyin": true,
+        "keep_original": true,
+        "limit_first_letter_length": 16,
+        "remove_duplicated_term": true,
+        "none_chinese_pinyin_tokenize": false
+      }
+    }
+  },
+  "max_ngram_diff": 50,
+  "number_of_shards": 3,
+  "number_of_replicas": 1,
+  "refresh_interval": "30s",
+  "index": {
+    "max_result_window": 100000,
+    "mapping": {
+      "nested_fields": {
+        "limit": 100
+      },
+      "total_fields": {
+        "limit": 1000
+      }
+    }
+  }
+}

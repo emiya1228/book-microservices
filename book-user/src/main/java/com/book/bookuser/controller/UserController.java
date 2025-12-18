@@ -5,9 +5,7 @@ import com.book.bookuser.dto.UserLoginDTO;
 import com.book.bookuser.service.UserService;
 import com.book.bookuser.util.UserConvert;
 import com.book.bookuser.vo.UserVO;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.book.bookuser.dto.UserRegisterDTO;
 import com.book.bookuser.entity.User;
 
@@ -15,6 +13,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/api/user")
 public class UserController {
 
     @Resource
@@ -46,5 +45,12 @@ public class UserController {
         UserVO vo = UserConvert.toVO(user);
 
         return Response.success(token);
+    }
+
+    @GetMapping("/info")
+    public Response<UserVO> getUser() {
+        User currentUserInfo = userService.getCurrentUserInfo();
+        UserVO vo = UserConvert.toVO(currentUserInfo);
+        return Response.success(vo);
     }
 }

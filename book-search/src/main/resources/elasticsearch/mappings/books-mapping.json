@@ -1,0 +1,131 @@
+{
+  "dynamic": "strict",
+  "properties": {
+    "id": {
+      "type": "long"
+    },
+    "title": {
+      "type": "text",
+      "analyzer": "ik_max_word",
+      "search_analyzer": "ik_smart",
+      "copy_to": ["combined_search"],
+      "fields": {
+        "pinyin": {
+          "type": "text",
+          "analyzer": "pinyin"
+        },
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "standard": {
+          "type": "text",
+          "analyzer": "standard"
+        }
+      }
+    },
+    "author": {
+      "type": "text",
+      "analyzer": "ik_max_word",
+      "search_analyzer": "ik_smart",
+      "copy_to": ["combined_search"],
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 100
+        }
+      }
+    },
+    "isbn": {
+      "type": "keyword"
+    },
+    "publisher": {
+      "type": "text",
+      "analyzer": "ik_smart",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "publishDate": {
+      "type": "date",
+      "format": "yyyy-MM-dd"
+    },
+    "description": {
+      "type": "text",
+      "analyzer": "ik_max_word",
+      "search_analyzer": "ik_smart",
+      "copy_to": ["combined_search"]
+    },
+    "price": {
+      "type": "double"
+    },
+    "stock": {
+      "type": "integer"
+    },
+    "soldCount": {
+      "type": "integer"
+    },
+    "viewCount": {
+      "type": "integer"
+    },
+    "categoryId": {
+      "type": "long"
+    },
+    "categoryName": {
+      "type": "keyword"
+    },
+    "status": {
+      "type": "integer"
+    },
+    "rating": {
+      "type": "double"
+    },
+    "recommended": {
+      "type": "boolean"
+    },
+    "hot": {
+      "type": "boolean"
+    },
+    "createTime": {
+      "type": "date",
+      "format": "yyyy-MM-dd HH:mm:ss"
+    },
+    "tags": {
+      "type": "nested",
+      "properties": {
+        "id": {
+          "type": "long"
+        },
+        "name": {
+          "type": "keyword"
+        },
+        "nameText": {
+          "type": "text",
+          "analyzer": "ik_max_word"
+        },
+        "color": {
+          "type": "keyword"
+        }
+      }
+    },
+    "categoryPath": {
+      "type": "keyword"
+    },
+    "combinedSearch": {
+      "type": "text",
+      "analyzer": "ik_max_word",
+      "search_analyzer": "ik_smart"
+    },
+    "inStock": {
+      "type": "boolean"
+    },
+    "hotScore": {
+      "type": "double"
+    },
+    "publishYear": {
+      "type": "integer"
+    }
+  }
+}

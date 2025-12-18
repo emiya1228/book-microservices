@@ -10,18 +10,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@MapperScan("com.book.bookcore.mapper")
+@MapperScan("com.book.bookcore.mapper")
 public class BookCoreApplication {
 
     public static void main(String[] args) {
-        // 先检查配置
-        checkNacosConfig();
         SpringApplication.run(BookCoreApplication.class, args);
     }
 
-    private static void checkNacosConfig() {
-        // 可以在这里添加配置检查逻辑
-        System.setProperty("spring.cloud.nacos.config.enable-remote-sync-config", "true");
-    }
 
 }

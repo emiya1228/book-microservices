@@ -27,7 +27,6 @@ public class JwtUtil {
         claims.put("userId", userId);
         claims.put("username", username);
         claims.put("role", role);
-
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)

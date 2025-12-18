@@ -39,6 +39,14 @@ spring:
             - name: JwtAuthFilter
               args:
                 enabled: true
+        - id: book-search-service
+          uri: lb://book-search-service
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - name: JwtAuthFilter
+              args:
+                enabled: true
 
 # Actuator监控配置
 management:

@@ -39,4 +39,13 @@ public class Response<T> {
         return res;
     }
 
+    public static <T> Response<T> fail(T data) {
+        Response<T> res = new Response<>();
+        res.setSuccess(Boolean.FALSE);
+        res.setCode(200);
+        res.setMessage("失败");
+        res.setData(data);
+        return res;
+    }
+
 }

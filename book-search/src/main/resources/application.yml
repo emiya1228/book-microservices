@@ -1,0 +1,64 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: book-search-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848  # Nacos地址
+        namespace: public
+        group: DEFAULT_GROUP
+        enabled: true
+        register-enabled: true
+
+  # Elasticsearch配置
+  elasticsearch:
+    uris: http://localhost:9200
+
+
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+
+  # 可选：Redis缓存热门搜索
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
+
+# 日志配置（便于调试）
+logging:
+  level:
+    org.springframework.data.elasticsearch: DEBUG
+    com.book.search: DEBUG
+  file:
+    name: logs/search-service.log
+
+# 健康检查
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# 自定义应用配置
+app:
+  search:
+    default-page-size: 20
+    max-page-size: 100
+    highlight:
+      pre-tag: <mark>
+      post-tag: </mark>
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  consumer:
+    group: book-consumer-group
+    consume-thread-max: 20
+    consume-thread-min: 10

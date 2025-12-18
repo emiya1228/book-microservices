@@ -63,6 +63,37 @@ public class Constants {
     public static final int USER_STATUS_UNNORMAL = 0;
 
     /**
+     * 分类状态正常
+     */
+    public static final int CATEGORY_STATUS_NORMAL = 1;
+    /**
+     * 分类状态_禁用
+     */
+    public static final int CATEGORY_STATUS_UNNORMAL = 0;
+
+    public static final String STATUS_BORROW = "借阅中";
+    public static final String STATUS_DONE = "已归还";
+    public static final String STATUS_DUE = "已逾期";
+
+    // 状态常量
+    public static final Integer STATUS_UNPAID = 0;
+    public static final Integer STATUS_PAID = 1;
+
+    public static final String FINE = "FINE";
+    public static final Integer RENEW_DAYS = 15;
+
+    /**
+     * '状态：0-等待中，1-可借阅，2-已通知
+     */
+    public static final Integer RESERVE_STATUS_WAIT = 0;
+    public static final Integer RESERVE_STATUS_READY = 1;
+    public static final Integer RESERVE_STATUS_CONFIRM = 2;
+
+    public static final String TOPIC_BOOK = "BOOK_TOPIC";
+    public static final String TAG_BOOK_ADD = "BOOK_ADD";
+    public static final String TAG_BOOK_UPDATE = "BOOK_UPDATE";
+    public static final String TAG_BOOK_DELETE = "BOOK_DELETE";
+    /**
      * 超期罚款率（元/天）
      */
     public static final double OVERDUE_FINE_RATE = 0.1;

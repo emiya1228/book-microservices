@@ -22,13 +22,19 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+
         // 1. 从Header获取Token
+        String uri = request.getRequestURI();
+
+        // 临时：打印所有请求并全部放行
+        System.out.println("请求路径: " + uri + ", 方法: " + request.getMethod());
         String token = request.getHeader("Authorization").substring(7);
+
         if (StringUtils.isEmpty(token)) {
             throw new ServiceException("未提供认证Token", 1002);
         }
 
-        UserContext.setCurrentUser(jwtUtil.getUserId(token), jwtUtil.getUsername(token), jwtUtil.getRole(token));
+        UserContext.setCurrentUser(Long.parseLong(request.getHeader("X-User-Id")), request.getHeader("X-Username"), Integer.parseInt(request.getHeader("X-User-Role")));
 
         return true;
     }
@@ -39,6 +45,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         // 请求结束后清理线程变量，防止内存泄漏
         UserContext.clear();
     }
+
+
 
 
 }

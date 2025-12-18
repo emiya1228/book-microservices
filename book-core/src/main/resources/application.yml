@@ -1,18 +1,13 @@
 server:
   port: 8081
-  servlet:
-    context-path: /api/core
+
 
 spring:
   application:
     name: book-core-service
 
   # 数据库配置
-  datasource:
-    url: jdbc:mysql://localhost:3306/library_db?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8
-    username: root
-    password: 127314hzsh
-    driver-class-name: com.mysql.cj.jdbc.Driver
+
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
@@ -101,6 +96,16 @@ management:
 logging:
   level:
     com.alibaba.cloud.nacos: DEBUG
-    com.alibaba.nacos.client.naming: INFO
     org.springframework.cloud.client.discovery: DEBUG
     com.book.bookcore.mapper: DEBUG  # 你的 Mapper 包路径
+
+jwt:
+  secret: book-microservices-jwt-secret-2025-change-me-in-production
+  expiration: 7200
+  header: Authorization
+  prefix: "Bearer "
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: book-producer-group

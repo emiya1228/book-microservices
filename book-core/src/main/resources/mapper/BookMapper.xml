@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.BookMapper">
+
+    <sql id="Base_Column_List">
+        id, title, subtitle, author, translator, isbn, publisher, publish_date, `language`, page_count, description, cover_image, price, discount_price,
+         stock, sold_count, view_count, category_id, keywords, status, rating, rating_count, is_recommended, is_hot, create_time, update_time
+    </sql>
+    <select id="getRecommendBooks" resultType="com.book.bookcore.entity.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        books b
+        where
+        b.category in
+        <foreach collection="categories" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        and not exists (
+        select
+        1
+        from
+        borrow_records br
+        where
+        br.user_id = #{userId}
+        and br.book_id = b.id)
+        and b.available_copies > 0
+        order by
+        (b.total_copies - b.available_copies)
+    </select>
+</mapper>
