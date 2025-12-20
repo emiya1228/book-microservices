@@ -1,4 +1,5 @@
 package com.book.bookcore.Controller;
+import com.book.bookcommon.dto.BookDTO;
 import com.book.bookcore.dto.BookCreateDTO;
 import com.book.bookcommon.result.Response;
 import com.book.bookcore.dto.BookUpdateDTO;
@@ -58,5 +59,11 @@ public class BookController {
     public Response getRecommendBook(@PathVariable Long id) {
         List<Book> books = bookService.recommendBooks(id);
         return Response.success(books);
+    }
+
+    @GetMapping("/today")
+    public Response getToday() {
+        List<BookDTO> booksToday = bookService.getBooksToday();
+        return Response.success(booksToday);
     }
 }

@@ -30,6 +30,7 @@ public class BookUtil {
         book.setCategoryId(bookCreateDTO.getCategoryId());
         book.setKeywords(bookCreateDTO.getKeywords());
         book.setCreateTime(LocalDateTime.now());
+        book.setUpdateTime(LocalDateTime.now());
         return book;
     }
 

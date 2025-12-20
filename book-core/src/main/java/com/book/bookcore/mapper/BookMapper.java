@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -92,4 +94,7 @@ public interface BookMapper extends BaseMapper<Book> {
      * 批量查询图书
      */
     List<Book> selectBatchIds(@Param("ids") List<Long> ids);
+
+
+    List<Book> getBooksToday(@Param("start") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,@Param("end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end);
 }

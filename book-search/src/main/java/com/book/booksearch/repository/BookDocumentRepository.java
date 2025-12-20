@@ -17,4 +17,6 @@ public interface BookDocumentRepository  extends ElasticsearchRepository<BookDoc
     public List<BookDocument> findByAuthorLike(String author);
 
     public List<BookDocument> findByPublisherContaining(String title);
+
+    public List<BookDocument> findAllById(List<Long> ids);
 }

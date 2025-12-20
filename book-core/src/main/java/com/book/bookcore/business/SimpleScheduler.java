@@ -24,7 +24,7 @@ public class SimpleScheduler {
     @Scheduled(cron = "0 0 2 * * ?")
     public void dailyTask() {
         List<BorrowRecord> borrowRecords = borrowRecordMapper.selectList(new QueryWrapper<BorrowRecord>().lt("due_date", LocalDate.now()).eq("status", "借阅中"));
-        //todo
+        // 通过某种方式通知用户todo
     }
 
     // 2. 固定间隔执行
@@ -32,7 +32,7 @@ public class SimpleScheduler {
     public void fixedRateTask() {
         List<BookReservation> bookReservations = bookReservationMapper.selectReadyReservations();
         if (bookReservations != null) {
-            //todo
+            // 通过某种方式通知用户todo
             for (BookReservation bookReservation : bookReservations) {
                 bookReservation.setStatus(Constants.RESERVE_STATUS_CONFIRM);
                 bookReservationMapper.update(bookReservation);

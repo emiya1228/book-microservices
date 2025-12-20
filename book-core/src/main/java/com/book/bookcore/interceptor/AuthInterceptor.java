@@ -23,8 +23,13 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
+        StringBuffer requestURL = request.getRequestURL();
+        //  检查是否是内部调用
+        String internalCall = request.getHeader("X-Internal-Call");
+        if ("true".equals(internalCall)) {
+            return true;
+        }
         // 1. 从Header获取Token
-
         String token = request.getHeader("Authorization").substring(7);
 
         if (StringUtils.isEmpty(token)) {

@@ -1,6 +1,7 @@
 package com.book.bookcore.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.book.bookcommon.dto.BookDTO;
 import com.book.bookcommon.exception.ServiceException;
 import com.book.bookcore.dto.BookCreateDTO;
 import com.book.bookcore.dto.BookUpdateDTO;
@@ -9,10 +10,12 @@ import com.book.bookcore.mapper.*;
 import com.book.bookcore.mq.BookMqProducer;
 import com.book.bookcore.util.BookUtil;
 import com.book.bookcore.vo.BookDetailVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -138,6 +141,21 @@ public class BookService {
             return new ArrayList<>();
         }
         return recommendBooks;
+    }
+
+    public List<BookDTO> getBooksToday(){
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime yesterday = now.minusDays(1);
+        List<Book> booksToday = bookMapper.getBooksToday(now, yesterday);
+        List<BookDTO> res = new ArrayList<>();
+        if(booksToday != null){
+            for (Book book : booksToday) {
+                BookDTO bookDTO = new BookDTO();
+                BeanUtils.copyProperties(book,bookDTO);
+                res.add(bookDTO);
+            }
+        }
+        return res;
     }
 
 }

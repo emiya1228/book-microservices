@@ -61,4 +61,10 @@ public class BookDocumentService {
     public void update(BookDocument bookDocument) {
         bookDocumentRepository.save(bookDocument);
     }
+
+    public void updateBatch(List<BookDocument> bookDocuments) {
+        bookDocumentRepository.saveAll(bookDocuments);
+    }
+
+
 }

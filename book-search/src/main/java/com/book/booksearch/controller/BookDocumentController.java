@@ -1,12 +1,10 @@
 package com.book.booksearch.controller;
 
 import com.book.bookcommon.result.Response;
+import com.book.booksearch.business.SimpleScheduler;
 import com.book.booksearch.entity.BookDocument;
 import com.book.booksearch.service.BookDocumentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +14,8 @@ import java.util.List;
 public class BookDocumentController {
     @Resource
     private BookDocumentService bookDocumentService;
+    @Resource
+    private SimpleScheduler simpleScheduler;
 
     @GetMapping("{bookId}")
     public Response getBookDocument(@PathVariable Long bookId) {
@@ -27,6 +27,12 @@ public class BookDocumentController {
     public Response getBookDocumentByTitle(@PathVariable String title) {
         List<BookDocument> bookDocumentsByTitle = bookDocumentService.getBookDocumentsByTitle(title);
         return Response.success(bookDocumentsByTitle);
+    }
+
+    @PostMapping
+    public Response addBookDocument() {
+        simpleScheduler.scheduled();
+        return Response.success(null);
     }
 
 
