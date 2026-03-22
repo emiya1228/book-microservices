@@ -10,7 +10,7 @@ import com.book.bookuser.dto.UserRegisterDTO;
 import com.book.bookuser.entity.User;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")

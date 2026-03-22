@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +25,7 @@ public class BookCategory implements Serializable {
 
     @TableField("description")
     private String description;
-    @NotNull
+
     @TableField("parent_id")
     private Long parentId;
 

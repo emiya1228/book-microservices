@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
 
 @Service
 public class BookCategoryService {
@@ -44,6 +47,7 @@ public class BookCategoryService {
                 }
             }
         }
+        List<CategoryTreeVO> collect = res.stream().sorted(Comparator.comparing(CategoryTreeVO::getId)).collect(Collectors.toList());
         return res;
     }
 

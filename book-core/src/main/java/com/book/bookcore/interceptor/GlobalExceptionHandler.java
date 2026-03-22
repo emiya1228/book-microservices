@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class
+GlobalExceptionHandler {
     /**
      * 处理你的业务异常
      * @ResponseStatus 可以设置返回的HTTP状态码，这里用200表示业务逻辑错误

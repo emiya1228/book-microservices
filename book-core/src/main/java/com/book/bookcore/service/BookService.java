@@ -158,4 +158,18 @@ public class BookService {
         return res;
     }
 
+    public List<Book> getBookByTitle(String title){
+        List<Book> books = bookMapper.selectByTitle(title);
+        return books;
+    }
+
+    public List<Book> getBookByCategory(String category){
+        List<Book> books = bookMapper.selectByCategory(category);
+        return books;
+    }
+
+    public List<Book> getBookByAuthor(String author){
+        List<Book> books = bookMapper.selectByAuthor(author);
+        return books;
+    }
 }

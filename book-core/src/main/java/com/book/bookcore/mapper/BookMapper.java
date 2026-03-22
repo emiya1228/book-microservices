@@ -23,6 +23,16 @@ public interface BookMapper extends BaseMapper<Book> {
     List<Book> selectByCategoryId(@Param("categoryId") Long categoryId);
 
     /**
+     * 根据分类ID查询图书列表
+     */
+    @Select("select * from book b join book_category bc on b.category_id = bc.id where bc.name = #{name} and bc.status = 1")
+    List<Book> selectByCategory(@Param("name") String name);
+    /**
+     * 根据书名查询图书列表
+     */
+    List<Book> selectByTitle(@Param("title") String title);
+
+    /**
      * 根据作者查询图书
      */
     List<Book> selectByAuthor(@Param("author") String author);

@@ -13,6 +13,8 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    private static final String RANK_KEY_PREFIX = "rank:";
+
     // ==============================common==============================
 
     /**
@@ -320,4 +322,31 @@ public class RedisUtil {
             return false;
         }
     }
+
+    // ==============================zSet==============================
+
+    /**
+     *
+     * @param key
+     * @param value
+     * @param score
+     */
+    public void addToRank(String key, Object value, double score) {
+        String rankKey = RANK_KEY_PREFIX + key;
+        redisTemplate.opsForZSet().add(rankKey, value, score);
+    }
+
+    /**
+     *
+     * @param key
+     * @param value
+     * @param score
+     * @return
+     */
+    public Double incrementScore(String key, Object value, double score) {
+        String rankKey = RANK_KEY_PREFIX + key;
+        return redisTemplate.opsForZSet().incrementScore(rankKey, value, score);
+    }
+
+
 }
